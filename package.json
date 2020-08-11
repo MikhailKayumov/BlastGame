@@ -1,0 +1,24 @@
+{
+  "name": "blastgame",
+  "version": "1.0.0",
+  "description": "Blast Game",
+  "scripts": {
+    "build": "webpack --progress --mode=production",
+    "watch": "webpack --watch --progress --mode=development",
+    "start": "webpack-dev-server --open"
+  },
+  "author": "Mikhail Kayumov",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-typescript": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "core-js": "^3.6.5",
+    "html-webpack-plugin": "^4.3.0",
+    "typescript": "^3.9.7",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

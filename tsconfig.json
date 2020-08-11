@@ -1,0 +1,11 @@
+{
+    "include": ["src/**/*"],
+    "compilerOptions": {
+        "rootDir": "./",
+        "target": "ESNext",
+        "module": "ESNext",
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "allowJs": true
+    }
+}
