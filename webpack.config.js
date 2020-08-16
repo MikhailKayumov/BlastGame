@@ -1,9 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: {
-        'js/game': path.resolve(__dirname, 'src/index.ts')
+        'game': path.resolve(__dirname, 'src/js/index.ts')
     },
     output: {
         filename: '[name].js',
@@ -37,11 +38,47 @@ module.exports = {
                         plugins: []
                     }
                 }
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: { sourceMap: true }
+                    }
+                ],
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: (resourcePath) => {
+                                return resourcePath.substring(resourcePath.indexOf('images')).replace(/\\/gm, '/');
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(woff2|woff)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'font'
+                        }
+                    }
+                ]
             }
         ],
     },
     resolve: {
-        extensions: ['.js', '.ts'],
+        extensions: ['.js', '.ts', '.scss'],
     },
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),
@@ -50,11 +87,14 @@ module.exports = {
         hot: true
     },
     devtool: 'source-map',
-    plugins: [new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: 'src/index.html',
-        title: 'Blast Game',
-        minify: false,
-        inject: 'head'
-    })]
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'src/index.html',
+            title: 'Blast Game',
+            minify: false,
+            inject: 'head'
+        }),
+        new MiniCssExtractPlugin({ filename: '[name].css' }),
+    ]
 };

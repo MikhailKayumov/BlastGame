@@ -1,0 +1,194 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "Marvin";
+  src: url('font/marvin.woff2') format('woff2'),
+       url('font/marvin.woff') format('woff');
+  font-style: normal;
+  font-weight: normal;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 10px;
+  font-family: Arial, sans-serif;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 14px/1.25 Marvin;
+  background-color: #0d233d;
+  background-image: url("../images/blocksbg.png");
+  background-size: auto 70px;
+  background-position: center center;
+  overflow: hidden;
+}
+.game__wrapper {
+  width: 1240px;
+  height: 100%;
+  background-color: rgba(13, 35, 61, 0.8);
+  border-radius: 40px;
+}
+.game__head, .game__body, .game__foot {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+.game__head {
+  flex: 120px;
+  justify-content: center;
+  .head__progressbar {
+    width: 1050px;
+    height: 120px;
+    background-image: url("../images/progressbar.png");
+    background-size: 1050px auto;
+    background-repeat: no-repeat;
+    .progress__line {
+      height: 32px;
+      width: 0;
+      position: absolute;
+      top: 43px;
+      left: 349px;
+      border-radius: 16px;
+      background-image: -moz-linear-gradient( 90deg, rgb(96,255,0) 1%, rgb(29,155,0) 32%, rgb(162,255,0) 77%, rgb(199,255,102) 93%, rgb(236,255,204) 100%);
+      background-image: -webkit-linear-gradient( 90deg, rgb(96,255,0) 1%, rgb(29,155,0) 32%, rgb(162,255,0) 77%, rgb(199,255,102) 93%, rgb(236,255,204) 100%);
+      background-image: -ms-linear-gradient( 90deg, rgb(96,255,0) 1%, rgb(29,155,0) 32%, rgb(162,255,0) 77%, rgb(199,255,102) 93%, rgb(236,255,204) 100%);
+      transition: width 0.2s linear;
+    }
+  }
+}
+.game__body {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 70px;
+  .body__left {
+    flex: 630px;
+    height: 701px;
+    max-width: 650px;
+    padding: 22px 24px;
+    background-image: url("../images/game_area.png");
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    .game__field {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      .block {
+        position: absolute;
+        width: 67px;
+        height: 73px;
+        background-size: 100%;
+        background-position: center center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        opacity: 1;
+        transition: all 0.2s ease-in-out;
+        &.type_1 {
+          background-image: url("../images/blocks/blue.png");
+        }
+        &.type_2 {
+          background-image: url("../images/blocks/green.png");
+        }
+        &.type_3 {
+          background-image: url("../images/blocks/purple.png");
+        }
+        &.type_4 {
+          background-image: url("../images/blocks/red.png");
+        }
+        &.type_5 {
+          background-image: url("../images/blocks/yellow.png");
+        }
+        &.fadeout {
+          animation: fadeout 0.3s cubic-bezier(.62,.17,.37,.58) both;
+        }
+      }
+    }
+  }
+  .body__right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    .panel__score {
+      position: relative;
+      width: 410px;
+      height: 450px;
+      background-image: url("../images/panel_score.png");
+      background-size: 100%;
+      background-position: center center;
+      background-repeat: no-repeat;
+      color: #ffffff;
+      .score__time, .score__count, .descr__text {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .descr__text {
+        top: 20px;
+        width: 200px;
+        text-transform: uppercase;
+        font: 19px Marvin, "Comic Sans MS";
+        font-weight: bold;
+      }
+      .score__time {
+        top: 86px;
+        width: 180px;
+        height: 180px;
+        font-size: 90px;
+      }
+      .score__count {
+        width: 290px;
+        text-align: center;
+        top: 336px;
+        font-size: 40px;
+      }
+    }
+    .bonuses {
+      display: flex;
+      .bonus__btn {
+        position: relative;
+        display: block;
+        width: 140px;
+        height: 160px;
+        color: #ffffff;
+        border: none;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0);
+        background-image: url("../images/bonus_btn.png");
+        background-size: 100%;
+        background-position: center center;
+        background-repeat: no-repeat;
+        transition: transform 0.2s ease-out;
+        outline: none;
+        &:hover { transform: scale(1.1); }
+        &:active { transform: scale(1.05); }
+        > span {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          width: 60px;
+          height: 32px;
+          top: 92px;
+          left: 30px;
+          font: 20px Marvin;
+        }
+      }
+    }
+  }
+}
+@keyframes fadeout {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}

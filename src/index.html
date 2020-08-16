@@ -3,10 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="game.css">
 </head>
 <body>
-<div id="app">
+<div class="game__wrapper">
+    <div class="game__head">
+        <div class="head__progressbar">
+            <div class="progress__line" id="progressLine"></div>
+        </div>
+    </div>
+    <div class="game__body">
+        <div class="body__left">
+            <div class="game__field" id="gameField"></div>
+        </div>
+        <div class="body__right">
+            <div class="panel__score">
+                <div class="descr__text">осталось ходов:</div>
+                <div class="score__time" id="movesCount"></div>
+                <div class="score__count" id="scoresCount"></div>
+            </div>
+            <div class="bonuses">
+                <button class="bonus__btn"><span>3</span></button>
+                <button class="bonus__btn"><span>5</span></button>
+                <button class="bonus__btn"><span>10</span></button>
+            </div>
+        </div>
+    </div>
+    <div class="game__foot">
+
+    </div>
 </div>
 </body>
 </html>
