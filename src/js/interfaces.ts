@@ -1,6 +1,7 @@
 export interface GameConfig {
     requiredScores: number;
     moves: number;
+    maxMixCount: number;
     tileSettings: ConfigTileSettings;
     renderSettings: ConfigRenderSettings;
 }

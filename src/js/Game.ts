@@ -13,12 +13,14 @@ export default class Game {
     private readonly ui: UI;
     private readonly render: Render;
     private readonly requiredScores: number;
+    private readonly maxMixCount: number
 
     public constructor(config: GameConfig) {
         this.config = config;
         this.scores = 0;
         this.requiredScores = config.requiredScores;
         this.moves = config.moves;
+        this.maxMixCount = config.maxMixCount;
         this.ui = new UI({
             gameField: config.renderSettings.field,
             processTileFunc: this.processTile.bind(this)
@@ -64,13 +66,13 @@ export default class Game {
         this.start();
         return this;
     }
-    private gameOver(result: 'win'|'fail'): Game {
+    private gameOver(result: 'win'|'fail'|'maxMixCount'): void {
         let msg;
         if (result == 'win') msg = 'Поздравляю! Вы победили.\nЖелаете ли сыграть еще раз?';
+        else if (result == 'maxMixCount') msg = 'К сожалению Вы проиграли.\nНа поле не осталось возможности сжечь тайлы.\nЖелаете ли сыграть еще раз?';
         else msg = 'К сожалению Вы проиграли.\nЖелаете ли отыграться?';
 
         if (window.confirm(msg)) this.restart();
-        return this;
     }
     private async processTile(tileData: TileData): Promise<void> {
         this.blastedTiles = [];
@@ -84,9 +86,14 @@ export default class Game {
             this.decreasedMoves();
 
             const emptyTiles = this.removeConnectedTiles();
+
+            let mixCount = 0;
             do {
                 this.fillEmptyTiles(emptyTiles);
+                mixCount++;
+                if (mixCount >= this.maxMixCount) return this.gameOver('maxMixCount');
             } while (!this.checkBlastChances());
+
             await this.render.fallTiles();
 
             await sleep(0.3);

@@ -6,8 +6,9 @@ export function sleep(seconds: number): Promise<void> {
 }
 window.addEventListener('load', () => {
     new Game({
-        requiredScores: 500,
-        moves: 15,
+        requiredScores: 1000,
+        moves: 30,
+        maxMixCount: 5,
         tileSettings: {
             rows: 9,
             columns: 9,

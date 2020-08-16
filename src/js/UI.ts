@@ -16,6 +16,7 @@ export default class UI {
         if (!this.canSelection) return;
 
         const target: HTMLElement = event.target;
+        console.log([target, this.isTile(target)]);
         if (!this.isTile(target)) return;
         this.canSelection = false;
 
